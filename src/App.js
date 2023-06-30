@@ -19,6 +19,12 @@ export default function App() {
       )
     );
   }
+
+  function deleteAll(items) {
+    // setItems((items) => items.splice(0, items.length)); OR easy way
+    setItems([]);
+  }
+
   return (
     <div className="app">
       <Logo />
@@ -27,6 +33,7 @@ export default function App() {
         items={items}
         onDeleteItem={handleDeleteItems}
         onToogleItem={handleToogleItems}
+        handleClearList={deleteAll}
       />
       <Stats items={items} />
     </div>
@@ -84,7 +91,7 @@ function Form({ onAddItems }) {
   );
 }
 
-function PackingList({ items, onDeleteItem, onToogleItem }) {
+function PackingList({ items, onDeleteItem, onToogleItem, handleClearList }) {
   //using controlled element concept
   const [sortBy, setSortBy] = useState("input");
 
@@ -125,6 +132,7 @@ function PackingList({ items, onDeleteItem, onToogleItem }) {
           <option value="description">Sort by Description</option>
           <option value="packed">Sort by Packed Status</option>
         </select>
+        <button onClick={handleClearList}>Clear list</button>
       </div>
     </div>
   );
